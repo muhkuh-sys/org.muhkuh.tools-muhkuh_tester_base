@@ -139,7 +139,7 @@ local function actionTestInstaller(tInstallHelper)
                   ['ID'] = string.format('%02d', uiTestCaseStepCnt),
                   ['NAME'] = strTestCaseName
                 }
-                local strTestLua = string.gsub(strTestTemplate, '@([^@]+)@', astrReplace)
+                local strTestLua = string.gsub(strTestTemplate, '@([%w_]+)@', astrReplace)
 
                 -- Write the test script to the installation base directory.
                 local strDestinationPathScript = tInstallHelper:replace_template(
