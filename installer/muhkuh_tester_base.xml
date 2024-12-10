@@ -4,7 +4,8 @@
 	      module="muhkuh_tester_base"
 	      artifact="muhkuh_tester_base"
 	      version="${PROJECT_VERSION}"
-	      vcs-id="${PROJECT_VERSION_VCS}">
+	      vcs-id="${PROJECT_VERSION_VCS}"
+	      extension="tar.xz">
 		<license name="GPL-2.0"/>
 		<author name="Muhkuh team" url="https://github.com/muhkuh-sys" />
 		<description>This module contains common parts for commandline and web UI tests.</description>
