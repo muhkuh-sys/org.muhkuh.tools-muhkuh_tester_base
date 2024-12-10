@@ -11,7 +11,14 @@ local function actionTestInstaller(tInstallHelper)
   local pl = tInstallHelper.pl
   local tLog = tInstallHelper.tLog
 
-  local strTestsFile = 'tests.xml'
+  -- Get the path to the test configuration from the define "define_test_configuration".
+  -- Default to "tests.xml" if the define does not exist.
+  local strTestsFileTemplate = '${define_test_configuration}'
+  local strTestsFile = tInstallHelper:replace_template(strTestsFileTemplate)
+  if strTestsFile==strTestsFileTemplate then
+    strTestsFile = 'tests.xml'
+  end
+
   if pl.path.exists(strTestsFile)~=strTestsFile then
     tLog.error('The test configuration file "%s" does not exist.', strTestsFile)
     tResult = nil
@@ -25,7 +32,7 @@ local function actionTestInstaller(tInstallHelper)
       tLog.error('Failed to read the file "%s": %s', strTestsFile, strError)
       tResult = nil
     else
-      local strDestinationPath = tInstallHelper:replace_template(string.format('${install_base}/%s', strTestsFile))
+      local strDestinationPath = tInstallHelper:replace_template('${install_base}/tests.xml')
       tResult, strError = pl.utils.writefile(strDestinationPath, strTestsFileContents, false)
       if tResult~=true then
         tLog.error('Failed to write the file "%s": %s', strDestinationPath, strError)
